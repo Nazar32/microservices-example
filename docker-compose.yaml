@@ -36,6 +36,10 @@ services:
       - POSTGRES_RUN_MIGRATION=true
     ports:
       - 3032:3032
+    networks:
+      - app-network
+    depends_on:
+      - postgres
   user:
     container_name: user-container
     build:
@@ -55,8 +59,14 @@ services:
     image: kartoza/postgis:12.0
     ports:
       - 5432:5432
+    networks:
+      - app-network
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASS=zRpvW3VBgwCMMX5c
       - POSTGRES_DBNAME=users
       - POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology,btree_gist
+
+networks:
+  app-network:
+    driver: bridge

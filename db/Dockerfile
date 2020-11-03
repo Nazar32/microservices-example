@@ -4,7 +4,8 @@ RUN apk add --no-cache 'su-exec>=0.2'
 RUN apk add --no-cache bash
 
 ENV INSTALL_DIR /opt/app
-ENV PORT 3031
+
+ENV PORT "$PORT"
 
 WORKDIR $INSTALL_DIR
 
